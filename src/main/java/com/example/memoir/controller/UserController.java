@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RestController
 public class UserController {
-
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.CREATED)
