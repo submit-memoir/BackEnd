@@ -17,7 +17,6 @@ public class JwtTokeIFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws SecurityException, IOException {
 
-        String parseToken = jwtTokenProvider
 
     }
 }

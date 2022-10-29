@@ -11,5 +11,5 @@ public class JwtTokenProvider {
 
     private final AuthDetailsService authDetailsService;
 
-    @Value("${")
+
 }

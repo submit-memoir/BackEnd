@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +27,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
-                .csrf().disable()
+                .csrf()
+                .ignoringAntMatchers("/h2-console/**")
+                .disable()
                 .cors()
 
                 .and()
@@ -37,6 +41,7 @@ public class SecurityConfig {
                 .authorizeRequests()
 
                 .antMatchers(HttpMethod.POST, "/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
 
                 .and().build();
 
