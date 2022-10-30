@@ -1,6 +1,6 @@
 package com.example.memoir;
 
-import com.example.memoir.entity.user.User;
+import com.example.memoir.domain.user.domain.user.User;
 
 public class GetUser {
 
