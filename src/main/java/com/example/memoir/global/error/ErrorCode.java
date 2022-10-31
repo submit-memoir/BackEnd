@@ -12,7 +12,10 @@ public enum ErrorCode {
     USERNAME_NOT_FOUND(404, "유저 이름을 찾을 수 없습니다."),
     EXPIRED_JWT(401, "토큰이 만료되었습니다."),
     INVALID_JWT(401,"유효하지 않은 토큰입니다"),
-    PASSWORD_MISMATCH(401, "비밀번호가 일치하지 않습니다.");
+    PASSWORD_MISMATCH(401, "비밀번호가 일치하지 않습니다."),
+
+    MEMOIR_NOT_FOUND(404,"회고록을 찾을 수 없습니다."),
+    MEMOIR_FORBIDDEN(401, "회고록에 대한 권한이 없습니다.");
 
     private final int status;
     private final String message;
