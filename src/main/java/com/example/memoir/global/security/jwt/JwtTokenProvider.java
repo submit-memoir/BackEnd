@@ -19,9 +19,9 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    private String secretKey = "${SECRET_KEY}";
+    private String secretKey = "7J2067KI7ZSE66Gc7KCd7Yq47JeQ7ISc7YWM7Iqk7Yq47L2U65Oc7J6Y7Kec66m07KKL6rKg64uk7ZWY7KeA66eM7Ja066C164uk";
 
-    private int accessTokenTime = "${ACCESS_TIME}";
+    private int accessTokenTime = 86400;
 
     private final AuthDetailsService authDetailsService;
 
