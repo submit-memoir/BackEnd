@@ -46,4 +46,12 @@ public class Memoir extends BaseTimeEntity {
         this.nextGoal = nextGoal;
         this.user = user;
     }
+
+    public void updateMemoir(String title, String goal, String learned, String felt, String nextGoal) {
+        this.title = title;
+        this.goal = goal;
+        this.learned = learned;
+        this.felt = felt;
+        this.nextGoal = nextGoal;
+    }
 }

@@ -1,10 +1,14 @@
 package com.example.memoir.domain.memoir.controller;
 
+import com.example.memoir.domain.memoir.controller.dto.request.MemoirUpdateRequest;
 import com.example.memoir.domain.memoir.controller.dto.request.MemoirWriteRequest;
+import com.example.memoir.domain.memoir.controller.dto.response.MemoirDetailsResponse;
 import com.example.memoir.domain.memoir.service.MemoirService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +36,16 @@ public class MemoirController {
     @DeleteMapping()
     public void memoirDelete(@RequestParam("memoirId") Long memoirId) {
         memoirService.memoirDelete(memoirId);
+    }
+
+    @PatchMapping("/update")
+    public void memoirUpdate(@RequestParam("memoirId") Long memoirId,
+                             @RequestBody @Valid MemoirUpdateRequest request) {
+        memoirService.memoirUpdate(memoirId, request);
+    }
+
+    @GetMapping()
+    public MemoirDetailsResponse memoirDetails(@RequestParam("memoirId") Long memoirId) {
+        return memoirService.memoirDetails(memoirId);
     }
 }
