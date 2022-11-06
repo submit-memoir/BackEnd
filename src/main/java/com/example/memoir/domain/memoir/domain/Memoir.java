@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 public class Memoir extends BaseTimeEntity {
 
@@ -53,5 +53,9 @@ public class Memoir extends BaseTimeEntity {
         this.learned = learned;
         this.felt = felt;
         this.nextGoal = nextGoal;
+    }
+
+    public String getNickName() {
+        return user.getNickName();
     }
 }

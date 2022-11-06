@@ -31,7 +31,6 @@ public class SecurityConfig {
 
         return http
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**")
                 .disable()
                 .cors()
 
@@ -44,7 +43,8 @@ public class SecurityConfig {
                 .authorizeRequests()
 
                 .antMatchers(HttpMethod.POST, "/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/memoir/**").permitAll()
 
                 .and()
                 .apply(new FilterConfig(objectMapper, jwtTokenProvider))

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseTimeEntity extends BaseIdEntity {
+public class BaseTimeEntity extends BaseIdEntity {
 
     @NotNull
     @LastModifiedDate

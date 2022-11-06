@@ -3,6 +3,7 @@ package com.example.memoir.domain.memoir.controller;
 import com.example.memoir.domain.memoir.controller.dto.request.MemoirUpdateRequest;
 import com.example.memoir.domain.memoir.controller.dto.request.MemoirWriteRequest;
 import com.example.memoir.domain.memoir.controller.dto.response.MemoirDetailsResponse;
+import com.example.memoir.domain.memoir.controller.dto.response.MemoirResponse;
 import com.example.memoir.domain.memoir.service.MemoirService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/memoir")
@@ -33,7 +35,7 @@ public class MemoirController {
     }
 
     // 삭제
-    @DeleteMapping()
+    @DeleteMapping
     public void memoirDelete(@RequestParam("memoirId") Long memoirId) {
         memoirService.memoirDelete(memoirId);
     }
@@ -44,8 +46,13 @@ public class MemoirController {
         memoirService.memoirUpdate(memoirId, request);
     }
 
-    @GetMapping()
+    @GetMapping
     public MemoirDetailsResponse memoirDetails(@RequestParam("memoirId") Long memoirId) {
         return memoirService.memoirDetails(memoirId);
+    }
+
+    @GetMapping("/list")
+    public List<MemoirResponse> memoirList() {
+        return memoirService.memoirList();
     }
 }

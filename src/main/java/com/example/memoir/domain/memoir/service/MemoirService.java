@@ -3,6 +3,7 @@ package com.example.memoir.domain.memoir.service;
 import com.example.memoir.domain.memoir.controller.dto.request.MemoirUpdateRequest;
 import com.example.memoir.domain.memoir.controller.dto.request.MemoirWriteRequest;
 import com.example.memoir.domain.memoir.controller.dto.response.MemoirDetailsResponse;
+import com.example.memoir.domain.memoir.controller.dto.response.MemoirResponse;
 import com.example.memoir.domain.memoir.domain.Memoir;
 import com.example.memoir.domain.memoir.domain.repository.MemoirRepository;
 import com.example.memoir.domain.memoir.exception.MemoirNotDeleteException;
@@ -13,6 +14,11 @@ import com.example.memoir.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 @RequiredArgsConstructor
 @Service
@@ -77,6 +83,33 @@ public class MemoirService {
                 .nextGoal(memoir.getNextGoal())
                 .nickName(memoir.getUser().getNickName())
                 .modifiedAt(memoir.getModifiedAt())
+                .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MemoirResponse> memoirList() {
+        return memoirRepository.findAll()
+                .stream().map(memoir -> MemoirResponse.builder()
+                        .id(memoir.getId())
+                        .title(memoir.getTitle())
+                        .goal(memoir.getGoal())
+                        .felt(memoir.getFelt())
+                        .learned(memoir.getLearned())
+                        .modifiedAt(memoir.getModifiedAt())
+                        .nickName(memoir.getNickName())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private MemoirResponse memoirBuilder(Memoir memoir) {
+        return MemoirResponse.builder()
+                .id(memoir.getId())
+                .goal(memoir.getGoal())
+                .felt(memoir.getFelt())
+                .learned(memoir.getLearned())
+                .modifiedAt(memoir.getModifiedAt())
+                .nickName(memoir.getNickName())
+                .title(memoir.getTitle())
                 .build();
     }
 }
