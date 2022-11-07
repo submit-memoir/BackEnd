@@ -18,13 +18,5 @@ class UserTest {
 
     private static final User user = GetUser.user;
 
-    @Test
-    void 유저_객체_생성() {
-        User user = new User();
-        assertNull(user.getUserId());
-        assertNull(user.getNickName());
-        assertNull(user.getPassword());
 
-        Assertions.assertThat(userRepository.count()).isEqualTo(1L);
-    }
 }

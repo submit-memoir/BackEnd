@@ -55,4 +55,9 @@ public class MemoirController {
     public List<MemoirResponse> memoirList() {
         return memoirService.memoirList();
     }
+
+    @GetMapping("/mypage")
+    public List<MemoirResponse> myMemoirList() {
+        return memoirService.myMemoirList();
+    }
 }

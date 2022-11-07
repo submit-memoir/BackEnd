@@ -14,8 +14,6 @@ import java.time.LocalDate;
 @Builder
 public class MemoirResponse {
 
-    private final Long id;
-
     private final String title;
 
     private final String goal;
@@ -29,7 +27,6 @@ public class MemoirResponse {
     private final String nickName;
 
     public MemoirResponse(Memoir memoir) {
-        id = memoir.getId();
         title = memoir.getTitle();
         goal = memoir.getGoal();
         learned = memoir.getLearned();

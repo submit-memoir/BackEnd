@@ -90,7 +90,6 @@ public class MemoirService {
     public List<MemoirResponse> memoirList() {
         return memoirRepository.findAll()
                 .stream().map(memoir -> MemoirResponse.builder()
-                        .id(memoir.getId())
                         .title(memoir.getTitle())
                         .goal(memoir.getGoal())
                         .felt(memoir.getFelt())
@@ -101,15 +100,25 @@ public class MemoirService {
                 .collect(Collectors.toList());
     }
 
-    private MemoirResponse memoirBuilder(Memoir memoir) {
-        return MemoirResponse.builder()
-                .id(memoir.getId())
-                .goal(memoir.getGoal())
-                .felt(memoir.getFelt())
-                .learned(memoir.getLearned())
-                .modifiedAt(memoir.getModifiedAt())
-                .nickName(memoir.getNickName())
-                .title(memoir.getTitle())
-                .build();
+    // readOnly라고 명시하므로 읽기 전용 메소드라는 것을 알게 해주고 JPA를 사용할 경우 변경감지 작업을 수행하지 않아 성능상의 이점이 있다.
+    // 영속성 컨텍스트(엔티티를 영구 저장하는 환경)에 관리를 받지 않는다.
+    @Transactional(readOnly = true)
+    public List<MemoirResponse> myMemoirList() {
+
+        User user = userFacade.getCurrentUser();
+
+        return memoirRepository.findAllByUserId(user.getId())
+
+                .stream().map(memoir -> MemoirResponse.builder()
+                        .title(memoir.getTitle())
+                        .goal(memoir.getGoal())
+                        .felt(memoir.getFelt())
+                        .learned(memoir.getLearned())
+                        .modifiedAt(memoir.getModifiedAt())
+                        .nickName(memoir.getNickName())
+                        .build())
+                .collect(Collectors.toList());
+
     }
-}
+
+    }
