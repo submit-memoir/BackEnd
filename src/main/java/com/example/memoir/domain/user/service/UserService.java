@@ -1,8 +1,11 @@
 package com.example.memoir.domain.user.service;
 
+import com.example.memoir.domain.memoir.domain.Memoir;
+import com.example.memoir.domain.memoir.facade.MemoirFacade;
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
 import com.example.memoir.domain.user.controller.dto.response.TokenResponse;
+import com.example.memoir.domain.user.controller.dto.response.UserInfoResponse;
 import com.example.memoir.domain.user.domain.user.User;
 import com.example.memoir.domain.user.domain.user.repository.UserRepository;
 import com.example.memoir.domain.user.exception.AlreadyUserExistException;
@@ -22,6 +25,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserFacade userFacade;
+    private final MemoirFacade memoirFacade;
 
     @Transactional
     public void signup(UserSignUpRequest request) {
@@ -49,5 +53,16 @@ public class UserService {
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.generateAccessToken(request.getUserId()))
                 .build();
+    }
+
+    @Transactional
+    public UserInfoResponse userInfo() {
+         User user = userFacade.getCurrentUser();
+
+         return UserInfoResponse.builder()
+                 .userId(user.getUserId())
+                 .nickName(user.getNickName())
+                 .introduce(user.getIntroduce())
+                 .build();
     }
 }

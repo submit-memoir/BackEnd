@@ -3,9 +3,11 @@ package com.example.memoir.domain.user.controller;
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
 import com.example.memoir.domain.user.controller.dto.response.TokenResponse;
+import com.example.memoir.domain.user.controller.dto.response.UserInfoResponse;
 import com.example.memoir.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +31,10 @@ public class UserController {
     @PostMapping("/login")
     public TokenResponse login(@RequestBody @Valid UserLoginRequest request) {
         return userService.login(request);
+    }
+
+    @GetMapping("/mypage")
+    public UserInfoResponse myPage() {
+        return userService.userInfo();
     }
 }

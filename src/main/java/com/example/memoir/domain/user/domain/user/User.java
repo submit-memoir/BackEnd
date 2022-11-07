@@ -5,12 +5,15 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicInsert
 @Getter
 @Entity
 public class User extends BaseIdEntity {
@@ -23,10 +26,14 @@ public class User extends BaseIdEntity {
 
     private String password;
 
+    @Column(columnDefinition = "varchar(3000) default '자기소개를 입력해주세요'")
+    private String introduce;
+
     @Builder
-    public User(String nickName, String userId, String password) {
+    public User(String nickName, String userId, String password, String introduce) {
         this.nickName = nickName;
         this.userId = userId;
         this.password = password;
+        this.introduce = introduce;
     }
 }
