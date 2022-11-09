@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -59,5 +60,10 @@ public class MemoirController {
     @GetMapping("/mypage")
     public List<MemoirResponse> myMemoirList() {
         return memoirService.myMemoirList();
+    }
+
+    @GetMapping("/search")
+    public List<MemoirResponse> searchMemoir(@PathParam("keyword") String keyword) {
+        return memoirService.searchMemoir(keyword);
     }
 }

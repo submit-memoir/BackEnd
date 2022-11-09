@@ -121,4 +121,18 @@ public class MemoirService {
 
     }
 
+    @Transactional(readOnly = true)
+    public List<MemoirResponse> searchMemoir(String keyword) {
+        return memoirRepository.findByTitleContaining(keyword)
+                .stream().map(memoir -> MemoirResponse.builder()
+                        .title(memoir.getTitle())
+                        .goal(memoir.getGoal())
+                        .felt(memoir.getFelt())
+                        .learned(memoir.getLearned())
+                        .modifiedAt(memoir.getModifiedAt())
+                        .nickName(memoir.getNickName())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
     }
