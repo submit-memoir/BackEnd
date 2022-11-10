@@ -2,6 +2,7 @@ package com.example.memoir.domain.user.controller;
 
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
+import com.example.memoir.domain.user.controller.dto.request.UserUpdateRequest;
 import com.example.memoir.domain.user.controller.dto.response.TokenResponse;
 import com.example.memoir.domain.user.controller.dto.response.UserInfoResponse;
 import com.example.memoir.domain.user.service.UserService;
@@ -38,4 +39,11 @@ public class UserController {
     public UserInfoResponse myPage() {
         return userService.userInfo();
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/mypage")
+    public void updateUserInfo(@RequestBody @Valid UserUpdateRequest request) {
+        userService.userUpdate(request);
+    }
+
 }

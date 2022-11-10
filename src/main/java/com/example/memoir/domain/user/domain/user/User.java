@@ -12,7 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @DynamicInsert
 @Getter
 @Entity
@@ -26,6 +26,8 @@ public class User extends BaseIdEntity {
 
     private String password;
 
+
+
     @Column(columnDefinition = "varchar(3000) default '자기소개를 입력해주세요'")
     private String introduce;
 
@@ -34,6 +36,11 @@ public class User extends BaseIdEntity {
         this.nickName = nickName;
         this.userId = userId;
         this.password = password;
+        this.introduce = introduce;
+    }
+
+    public void UserUpdate(String nickName, String introduce) {
+        this.nickName = nickName;
         this.introduce = introduce;
     }
 }

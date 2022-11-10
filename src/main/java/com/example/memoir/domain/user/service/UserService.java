@@ -4,6 +4,7 @@ import com.example.memoir.domain.memoir.domain.Memoir;
 import com.example.memoir.domain.memoir.facade.MemoirFacade;
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
+import com.example.memoir.domain.user.controller.dto.request.UserUpdateRequest;
 import com.example.memoir.domain.user.controller.dto.response.TokenResponse;
 import com.example.memoir.domain.user.controller.dto.response.UserInfoResponse;
 import com.example.memoir.domain.user.domain.user.User;
@@ -25,7 +26,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserFacade userFacade;
-    private final MemoirFacade memoirFacade;
 
     @Transactional
     public void signup(UserSignUpRequest request) {
@@ -64,5 +64,15 @@ public class UserService {
                  .nickName(user.getNickName())
                  .introduce(user.getIntroduce())
                  .build();
+    }
+
+    @Transactional
+    public void userUpdate(UserUpdateRequest request) {
+        User user = userFacade.getCurrentUser();
+
+        user.UserUpdate(
+                request.getIntroduce(),
+                request.getNickName()
+        );
     }
 }
