@@ -39,8 +39,12 @@ public class User extends BaseIdEntity {
         this.introduce = introduce;
     }
 
-    public void UserUpdate(String nickName, String introduce) {
+    public void updateUser(String nickName, String introduce) {
         this.nickName = nickName;
         this.introduce = introduce;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
     }
 }

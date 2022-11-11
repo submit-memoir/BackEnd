@@ -1,7 +1,6 @@
 package com.example.memoir.domain.user.service;
 
-import com.example.memoir.domain.memoir.domain.Memoir;
-import com.example.memoir.domain.memoir.facade.MemoirFacade;
+import com.example.memoir.domain.user.controller.dto.request.UpdatePasswordRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserUpdateRequest;
@@ -67,12 +66,21 @@ public class UserService {
     }
 
     @Transactional
-    public void userUpdate(UserUpdateRequest request) {
+    public void updateUser(UserUpdateRequest request) {
         User user = userFacade.getCurrentUser();
 
-        user.UserUpdate(
+        user.updateUser(
                 request.getIntroduce(),
                 request.getNickName()
         );
+    }
+
+    @Transactional
+    public void updatePassword(UpdatePasswordRequest request) {
+        User user = userFacade.getCurrentUser();
+
+        userFacade.checkPassword(user, request.getPassword());
+
+        user.updatePassword(passwordEncoder.encode(request.getChangePassword()));
     }
 }

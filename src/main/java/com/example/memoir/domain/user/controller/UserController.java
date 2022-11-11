@@ -1,5 +1,6 @@
 package com.example.memoir.domain.user.controller;
 
+import com.example.memoir.domain.user.controller.dto.request.UpdatePasswordRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserLoginRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserSignUpRequest;
 import com.example.memoir.domain.user.controller.dto.request.UserUpdateRequest;
@@ -43,7 +44,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping("/mypage")
     public void updateUserInfo(@RequestBody @Valid UserUpdateRequest request) {
-        userService.userUpdate(request);
+        userService.updateUser(request);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/mypage/update")
+    public void updatePassword(@RequestBody @Valid UpdatePasswordRequest request) {
+        userService.updatePassword(request);
+    }
 }
