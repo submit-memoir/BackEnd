@@ -34,4 +34,8 @@ public class Comment extends BaseIdEntity {
         this.comment = comment;
         this.user = user;
     }
+
+    public void commentUpdate(String comment) {
+        this.comment = comment;
+    }
 }

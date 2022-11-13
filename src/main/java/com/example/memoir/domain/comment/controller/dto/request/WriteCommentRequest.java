@@ -1,4 +1,4 @@
-package com.example.memoir.domain.comment.controller.dto;
+package com.example.memoir.domain.comment.controller.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

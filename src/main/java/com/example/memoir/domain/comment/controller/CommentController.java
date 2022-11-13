@@ -1,9 +1,11 @@
 package com.example.memoir.domain.comment.controller;
 
-import com.example.memoir.domain.comment.controller.dto.WriteCommentRequest;
+import com.example.memoir.domain.comment.controller.dto.request.UpdateCommentRequest;
+import com.example.memoir.domain.comment.controller.dto.request.WriteCommentRequest;
 import com.example.memoir.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,5 +27,12 @@ public class CommentController {
     public void writeComment(@PathVariable("feedId") Long id,
                              @RequestBody @Valid WriteCommentRequest request) {
 
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/{commentId}")
+    public void updateComment(@PathVariable("commentId") Long commentId,
+                              @RequestBody @Valid UpdateCommentRequest request) {
+        commentService.commentUpdate(request, commentId);
     }
 }

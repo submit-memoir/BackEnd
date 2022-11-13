@@ -2,7 +2,6 @@ package com.example.memoir.domain.memoir.domain;
 
 import com.example.memoir.domain.user.domain.user.User;
 import com.example.memoir.global.entity.BaseTimeEntity;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

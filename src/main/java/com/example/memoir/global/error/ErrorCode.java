@@ -16,6 +16,7 @@ public enum ErrorCode {
 
     MEMOIR_NOT_FOUND(404,"회고록을 찾을 수 없습니다."),
     MEMOIR_NOT_DELETE(401, "회고록을 삭제 할 수 없습니다."),
+    COMMENT_NOT_UPDATE(401, "댓글을 수정할 수 없습니다."),
     MEMOIR_NOT_UPDATE(401, "회고록을 수정할 수 없습니다.");
 
     private final int status;
