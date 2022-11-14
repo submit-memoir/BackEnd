@@ -1,11 +1,9 @@
 package com.example.memoir.domain.memoir.controller.dto.response;
 
 import com.example.memoir.domain.memoir.domain.Memoir;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 

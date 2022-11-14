@@ -15,5 +15,5 @@ public class WriteCommentRequest {
 
     @NotBlank(message = "댓글 내용을 입력해주세요.")
     @Size(max = 3000)
-    private String comment;
+    private String content;
 }

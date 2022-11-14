@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 public class Comment extends BaseIdEntity {
 
     @Column(length = 3000)
-    private String comment;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "userId")
@@ -30,12 +30,16 @@ public class Comment extends BaseIdEntity {
     private Memoir memoir;
 
     @Builder
-    public Comment(String comment, User user, Memoir memoir) {
-        this.comment = comment;
+    public Comment(String content, User user, Memoir memoir) {
+        this.content = content;
         this.user = user;
     }
 
-    public void commentUpdate(String comment) {
-        this.comment = comment;
+    public void commentUpdate(String content) {
+        this.content = content;
+    }
+
+    public String getNickName() {
+        return user.getNickName();
     }
 }
