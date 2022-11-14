@@ -5,6 +5,7 @@ import com.example.memoir.domain.comment.controller.dto.request.WriteCommentRequ
 import com.example.memoir.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class CommentController {
     @PostMapping("/{feedId}")
     public void writeComment(@PathVariable("feedId") Long id,
                              @RequestBody @Valid WriteCommentRequest request) {
-
+        commentService.commentWrite(request, id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -34,5 +35,11 @@ public class CommentController {
     public void updateComment(@PathVariable("commentId") Long commentId,
                               @RequestBody @Valid UpdateCommentRequest request) {
         commentService.commentUpdate(request, commentId);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable("commentId") Long commentId) {
+        commentService.commentDelete(commentId);
     }
 }

@@ -4,6 +4,7 @@ import com.example.memoir.domain.comment.controller.dto.request.UpdateCommentReq
 import com.example.memoir.domain.comment.controller.dto.request.WriteCommentRequest;
 import com.example.memoir.domain.comment.domain.Comment;
 import com.example.memoir.domain.comment.domain.repository.CommentRepository;
+import com.example.memoir.domain.comment.exception.CommentNotDeleteException;
 import com.example.memoir.domain.comment.exception.CommentNotUpdateException;
 import com.example.memoir.domain.comment.facade.CommentFacade;
 import com.example.memoir.domain.memoir.facade.MemoirFacade;
@@ -11,6 +12,7 @@ import com.example.memoir.domain.user.domain.user.User;
 import com.example.memoir.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,6 +24,7 @@ public class CommentService {
 
     private final CommentFacade commentFacade;
 
+    @Transactional
     public void commentWrite(WriteCommentRequest request, Long id) {
         commentRepository.save(
                 Comment.builder()
@@ -32,6 +35,7 @@ public class CommentService {
         );
     }
 
+    @Transactional
     public void commentUpdate(UpdateCommentRequest request, Long commentId) {
         User user = userFacade.getCurrentUser();
         Comment comment = commentFacade.getCommentId(commentId);
@@ -41,5 +45,17 @@ public class CommentService {
         }
 
         comment.commentUpdate(request.getComment());
+    }
+
+    @Transactional
+    public void commentDelete(Long commentId) {
+        User user = userFacade.getCurrentUser();
+        Comment comment = commentFacade.getCommentId(commentId);
+
+        if(!user.equals(comment.getUser())) {
+            throw CommentNotDeleteException.EXCEPTION;
+        }
+
+        commentRepository.delete(comment);
     }
 }
