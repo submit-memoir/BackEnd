@@ -8,6 +8,6 @@ public class CommentNotUpdateException extends MemoirException {
     public static final MemoirException EXCEPTION = new CommentNotUpdateException();
 
     private CommentNotUpdateException() {
-        super(ErrorCode.COMMENT_NOT_MODIFY);
+        super(ErrorCode.COMMENT_NOT_UPDATE);
     }
 }
