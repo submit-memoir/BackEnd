@@ -90,9 +90,11 @@ public class MemoirService {
     public List<MemoirResponse> memoirList() {
         return memoirRepository.findAll()
                 .stream().map(memoir -> MemoirResponse.builder()
+                        .id(memoir.getId())
                         .title(memoir.getTitle())
                         .goal(memoir.getGoal())
                         .felt(memoir.getFelt())
+                        .nextGoal(memoir.getNextGoal())
                         .learned(memoir.getLearned())
                         .modifiedAt(memoir.getModifiedAt())
                         .nickName(memoir.getNickName())
