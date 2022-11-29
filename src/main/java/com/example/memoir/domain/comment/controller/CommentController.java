@@ -27,8 +27,8 @@ public class CommentController {
     private final CommentService commentService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{feedId}")
-    public void writeComment(@PathVariable("feedId") Long id,
+    @PostMapping("/{memoirId}")
+    public void writeComment(@PathVariable("memoirId") Long id,
                              @RequestBody @Valid WriteCommentRequest request) {
         commentService.commentWrite(request, id);
     }
