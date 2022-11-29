@@ -31,11 +31,14 @@ public class CommentService {
 
     @Transactional
     public void commentWrite(WriteCommentRequest request, Long id) {
+        
+        User user = userFacade.getCurrentUser();
+        Memoir memoir = memoirFacade.getMemoirId(id);
         commentRepository.save(
                 Comment.builder()
                         .content(request.getContent())
-                        .user(userFacade.getCurrentUser())
-                        .memoir(memoirFacade.getMemoirId(id))
+                        .user(user)
+                        .memoir(memoir)
                         .build()
         );
     }
